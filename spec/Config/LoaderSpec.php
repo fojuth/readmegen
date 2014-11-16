@@ -23,11 +23,6 @@ class LoaderSpec extends ObjectBehavior
         unlink($this->badConfigFile);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('ReadmeGen\Config\Loader');
-    }
-
     function it_should_throw_exception_when_default_config_doesnt_exist()
     {
         $this->shouldThrow('\InvalidArgumentException')->during('get', array('foobar.yml'));

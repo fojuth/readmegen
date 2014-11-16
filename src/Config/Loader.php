@@ -12,12 +12,19 @@ class Loader
      * Returns the config as an array.
      * 
      * @param string $path Path to the file.
+     * @param array $sourceConfig Config array the result should be merged with.
      * @return array
      * @throws \Symfony\Component\Yaml\Exception\ParseException When a parse error occurs.
      */
-    public function get($path)
+    public function get($path, array $sourceConfig = null)
     {
-        return Yaml::parse($this->getFileContent($path));
+        $config = Yaml::parse($this->getFileContent($path));
+        
+        if (false === empty($sourceConfig)) {
+            return array_replace_recursive($config, $sourceConfig);
+        }
+        
+        return $config;
     }
     
     /**

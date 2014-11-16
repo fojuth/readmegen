@@ -13,7 +13,7 @@ class LoaderSpec extends ObjectBehavior
 
     function let()
     {
-        file_put_contents($this->dummyConfigFile, "vcs: git");
+        file_put_contents($this->dummyConfigFile, "vcs: git\nfoo: bar");
         file_put_contents($this->badConfigFile, "badly:\tformed\n\tfile");
     }
 
@@ -46,6 +46,14 @@ class LoaderSpec extends ObjectBehavior
     function it_should_have_specific_values_loaded()
     {
         $this->get($this->dummyConfigFile)->shouldHaveKey('vcs');
+    }
+
+    function it_should_merge_config_files()
+    {
+        $config = $this->get($this->dummyConfigFile, array('vcs' => 'svn'));
+        
+        $config['vcs']->shouldBe('svn');
+        $config['foo']->shouldBe('bar');
     }
 
     function getMatchers()

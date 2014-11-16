@@ -3,7 +3,6 @@
 namespace spec\ReadmeGen\Vcs;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use ReadmeGen\Vcs\Type\TypeInterface;
 
 class ParserSpec extends ObjectBehavior

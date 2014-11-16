@@ -3,7 +3,6 @@
 namespace spec\ReadmeGen\Config;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class LoaderSpec extends ObjectBehavior
 {

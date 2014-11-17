@@ -1,6 +1,4 @@
-<?php
-
-namespace ReadmeGen\Vcs;
+<?php namespace ReadmeGen\Vcs;
 
 use ReadmeGen\Vcs\Type\TypeInterface;
 
@@ -12,6 +10,8 @@ use ReadmeGen\Vcs\Type\TypeInterface;
 class Parser
 {
     /**
+     * VCS-specific parser.
+     * 
      * @var TypeInterface
      */
     protected $vcs;

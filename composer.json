@@ -11,6 +11,7 @@
         }
     },
     "require": {
-        "symfony/yaml": "~2.1"
+        "symfony/yaml": "~2.1",
+        "symfony/console": "2.5.*"
     }
 }

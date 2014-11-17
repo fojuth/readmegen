@@ -30,4 +30,14 @@ class Parser
     {
         return $this->vcs->parse();
     }
+
+    /**
+     * Returns the VCS parser.
+     * 
+     * @return TypeInterface
+     */
+    public function getVcsParser()
+    {
+        return $this->vcs;
+    }
 }

@@ -59,11 +59,18 @@ namespace spec\ReadmeGen {
 
 namespace ReadmeGen\Vcs\Type {
     
+    use ReadmeGen\Shell;
+    
     class Dummyvcs implements \ReadmeGen\Vcs\Type\TypeInterface {
         
         public function parse()
         {
             return array();
+        }
+        
+        public function setShellRunner(Shell $shell)
+        {
+            ;
         }
         
     }

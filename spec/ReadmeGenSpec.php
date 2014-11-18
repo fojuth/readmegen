@@ -57,6 +57,9 @@ namespace spec\ReadmeGen {
     
 }
 
+/**
+ * Dummy VCS type class used by ReadmeGen during tests.
+ */
 namespace ReadmeGen\Vcs\Type {
     
     use ReadmeGen\Shell;
@@ -70,7 +73,26 @@ namespace ReadmeGen\Vcs\Type {
         
         public function setShellRunner(Shell $shell)
         {
-            ;
+        }
+
+        public function setOptions(array $options = null)
+        {
+        }
+
+        public function setArguments(array $arguments = null)
+        {
+        }
+
+        public function hasOption($option)
+        {
+        }
+
+        public function hasArgument($argument)
+        {
+        }
+
+        public function getArgument($argument)
+        {
         }
         
     }

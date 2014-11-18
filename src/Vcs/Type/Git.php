@@ -14,6 +14,9 @@ class Git implements TypeInterface
      */
     protected $shell;
     
+    protected $arguments = array();
+    protected $options = array();
+    
     /**
      * Parses the log.
      * 
@@ -22,9 +25,8 @@ class Git implements TypeInterface
     public function parse()
     {
         $log = $this->runCommand($this->getCommand());
-        $logArray = explode(self::MSG_SEPARATOR, $log);
         
-        return array_filter(array_map('trim', $logArray));
+        return array_filter(array_map('trim', explode(self::MSG_SEPARATOR, $log)));
     }
 
     /**
@@ -46,5 +48,29 @@ class Git implements TypeInterface
     {
         return 'git log --pretty=format:"%s{{MSG_SEPARATOR}}%b"';
     }
-    
+
+    public function setOptions(array $options = null)
+    {
+        $this->options = $options;
+    }
+
+    public function setArguments(array $arguments = null)
+    {
+        $this->arguments = $arguments;
+    }
+
+    public function hasOption($option)
+    {
+        return in_array($option, $this->options);
+    }
+
+    public function hasArgument($argument)
+    {
+        return isset($this->arguments[$argument]);
+    }
+
+    public function getArgument($argument)
+    {
+        return $this->arguments[$argument];
+    }
 }

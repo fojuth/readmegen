@@ -62,37 +62,11 @@ namespace spec\ReadmeGen {
  */
 namespace ReadmeGen\Vcs\Type {
     
-    use ReadmeGen\Shell;
-    
-    class Dummyvcs implements \ReadmeGen\Vcs\Type\TypeInterface {
+    class Dummyvcs extends \ReadmeGen\Vcs\Type\AbstractType {
         
         public function parse()
         {
             return array();
-        }
-        
-        public function setShellRunner(Shell $shell)
-        {
-        }
-
-        public function setOptions(array $options = null)
-        {
-        }
-
-        public function setArguments(array $arguments = null)
-        {
-        }
-
-        public function hasOption($option)
-        {
-        }
-
-        public function hasArgument($argument)
-        {
-        }
-
-        public function getArgument($argument)
-        {
         }
         
     }

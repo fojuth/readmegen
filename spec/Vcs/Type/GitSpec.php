@@ -35,4 +35,17 @@ class GitSpec extends ObjectBehavior
         $this->getArgument('foo')->shouldReturn('bar');
     }
     
+    function it_should_add_options_and_arguments_to_the_command(Shell $shell)
+    {
+        $log = sprintf("Foo bar.%s\nDummy message.%s\n\n", Git::MSG_SEPARATOR, Git::MSG_SEPARATOR);
+        $shell->run(sprintf('git log --pretty=format:"%%s%s%%b"', Git::MSG_SEPARATOR))->willReturn($log);
+        
+        $this->setShellRunner($shell);
+        
+        $this->setOptions(array('x', 'y'));
+        $this->setArguments(array('foo' => 'bar', 'baz' => 'wat'));
+        
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%s{{MSG_SEPARATOR}}%b" --x --y --foo=bar --baz=wat');
+    }
+    
 }

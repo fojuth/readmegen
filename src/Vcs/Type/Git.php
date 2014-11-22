@@ -14,9 +14,35 @@ class Git extends AbstractType
         return array_filter(array_map('trim', explode(self::MSG_SEPARATOR, $this->getLog())));
     }
     
-    protected function getCommand()
+    /**
+     * Returns the base VCS log command.
+     * 
+     * @return string
+     */
+    protected function getBaseCommand()
     {
         return 'git log --pretty=format:"%s{{MSG_SEPARATOR}}%b"';
+    }
+    
+    /**
+     * Returns the compiled VCS log command.
+     * 
+     * @return string
+     */
+    public function getCommand()
+    {
+        $options = $this->getOptions();
+        $arguments = $this->getArguments();
+        
+        array_walk($options, function(&$option){
+            $option = '--'.$option;
+        });
+        
+        array_walk($arguments, function(&$value, $argument){
+            $value = '--'.$argument.'='.$value;
+        });
+        
+        return trim(sprintf('%s %s %s', $this->getBaseCommand(), join(' ', $options), join(' ', $arguments)));
     }
     
     protected function getLog()

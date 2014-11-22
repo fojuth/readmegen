@@ -45,6 +45,11 @@ abstract class AbstractType implements TypeInterface
     {
         return in_array($option, $this->options);
     }
+    
+    public function getOptions()
+    {
+        return $this->options;
+    }
 
     public function hasArgument($argument)
     {
@@ -54,6 +59,11 @@ abstract class AbstractType implements TypeInterface
     public function getArgument($argument)
     {
         return $this->arguments[$argument];
+    }
+    
+    public function getArguments()
+    {
+        return $this->arguments;
     }
     
 }

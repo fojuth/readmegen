@@ -12,7 +12,7 @@ class GitSpec extends ObjectBehavior
     function it_should_parse_a_git_log(Shell $shell)
     {
         $log = sprintf("Foo bar.%s\nDummy message.%s\n\n", Git::MSG_SEPARATOR, Git::MSG_SEPARATOR);
-        $shell->run(sprintf('git log --pretty=format:"%%s%s%%b"', Git::MSG_SEPARATOR))->willReturn($log);
+        $shell->run($this->getCommand())->willReturn($log);
         
         $this->setShellRunner($shell);
         

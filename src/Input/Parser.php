@@ -14,8 +14,8 @@ class Parser
     public function __construct()
     {
         $this->handler = new Getopt(array(
-            new Option(null, 'from', Getopt::REQUIRED_ARGUMENT),
-            new Option(null, 'to', Getopt::OPTIONAL_ARGUMENT),
+            new Option('f', 'from', Getopt::REQUIRED_ARGUMENT),
+            new Option('t', 'to', Getopt::OPTIONAL_ARGUMENT),
         ));
     }
 

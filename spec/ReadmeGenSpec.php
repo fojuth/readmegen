@@ -9,10 +9,18 @@ namespace spec\ReadmeGen {
     {
 
         protected $dummyConfigFile = 'dummy_config.yaml';
-        protected $dummyConfig = "vcs: dummyvcs\nfoo: bar";
+        protected $dummyConfig = "vcs: dummyvcs\nfoo: bar\nmessage_groups:\n  Features:\n    - feat\n    - feature\n  Bugfixes:\n    - fix\n    - bugfix";
         protected $dummyConfigArray = array(
             'vcs' => 'dummyvcs',
             'foo' => 'bar',
+            'message_groups' => array(
+                'Features' => array(
+                    'feat', 'feature'
+                ),
+                'Bugfixes' => array(
+                    'fix', 'bugfix'
+                ),
+            ),
         );
         protected $badConfigFile = 'bad_config.yaml';
         protected $badConfig = "vcs: nope\nfoo: bar";

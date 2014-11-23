@@ -15,8 +15,8 @@ class ParserSpec extends ObjectBehavior
     function it_should_parse_the_vcs_log_into_an_array(TypeInterface $vcs)
     {
         $returnData = array(
-            'foo' => 'bar',
-            'baz' => 42,
+            'foo bar',
+            'baz',
         );
         
         $vcs->parse()->willReturn($returnData);

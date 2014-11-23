@@ -1,4 +1,8 @@
 {
+    "require": {
+        "symfony/yaml": "~2.1",
+        "ulrichsg/getopt-php": "2.*"
+    },
     "require-dev": {
         "phpspec/phpspec": "dev-master"
     },
@@ -9,9 +13,5 @@
         "psr-4": {
             "ReadmeGen\\": "src/"
         }
-    },
-    "require": {
-        "symfony/yaml": "~2.1",
-        "symfony/console": "2.5.*"
     }
 }

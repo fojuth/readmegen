@@ -9,19 +9,22 @@ class MdSpec extends ObjectBehavior
 {
     protected $issueTrackerUrl = 'http://some.issue.tracker.com/show/';
     protected $issueTrackerPattern = 'http://some.issue.tracker.com/show/\1';
+    protected $log = array(
+        'Features' => array(
+            'bar #123 baz',
+            'dummy feature',
+        ),
+        'Bugfixes' => array(
+            'some bugfix (#890)',
+        ),
+    );
+
+    function let() {
+        $this->setLog($this->log);
+    }
 
     function it_should_add_links_to_the_issue_tracker()
     {
-        $log = array(
-            'Features' => array(
-                'bar #123 baz',
-                'dummy feature',
-            ),
-            'Bugfixes' => array(
-                'some bugfix (#890)',
-            ),
-        );
-
         $result = array(
             'Features' => array(
                 "bar [#123]({$this->issueTrackerUrl}123) baz",
@@ -32,8 +35,20 @@ class MdSpec extends ObjectBehavior
             ),
         );
 
-        $this->setLog($log);
         $this->setIssueTrackerUrlPattern($this->issueTrackerPattern);
         $this->decorate()->shouldReturn($result);
+    }
+
+    function it_should_generate_a_write_ready_output() {
+        $result = array(
+            "\n#### Features",
+            '* bar #123 baz',
+            '* dummy feature',
+            "\n#### Bugfixes",
+            '* some bugfix (#890)',
+            "\n---",
+        );
+
+        $this->generate()->shouldReturn($result);
     }
 }

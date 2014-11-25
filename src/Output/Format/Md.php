@@ -1,6 +1,7 @@
 <?php namespace ReadmeGen\Output\Format;
 
 use ReadmeGen\Output\Format\FormatInterface;
+use ReadmeGen\Vcs\Type\AbstractType as VCS;
 
 class Md implements FormatInterface
 {
@@ -20,7 +21,8 @@ class Md implements FormatInterface
         return $this;
     }
 
-    public function setIssueTrackerUrlPattern($pattern){
+    public function setIssueTrackerUrlPattern($pattern)
+    {
         $this->pattern = $pattern;
 
         return $this;
@@ -35,15 +37,36 @@ class Md implements FormatInterface
         return $this->log;
     }
 
-    protected function injectLinks(&$entry){
+    protected function injectLinks(&$entry)
+    {
         $entry = preg_replace('/#(\d+)/', "[#\\1]({$this->pattern})", $entry);
     }
 
-    public function generate(){
-        return 'foo';
+    public function generate()
+    {
+        $log = array();
+
+        foreach ($this->log as $header => &$entries) {
+            $log[] = sprintf("\n#### %s", $header);
+
+            foreach ($entries as &$line) {
+                $message = explode(VCS::MSG_SEPARATOR, $line);
+
+                $log[] = sprintf("* %s", trim($message[0]));
+
+                if (true === isset($message[1])) {
+                    $log[] = sprintf("\n  %s", trim($message[1]));
+                }
+            }
+        }
+
+        $log[] = "\n---";
+
+        return $log;
     }
 
-    public function getFileName(){
+    public function getFileName()
+    {
         return $this->fileName;
     }
 

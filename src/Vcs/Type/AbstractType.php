@@ -5,6 +5,7 @@ use ReadmeGen\Vcs\Type\TypeInterface;
 
 abstract class AbstractType implements TypeInterface
 {
+    const MSG_SEPARATOR = '{{MSG_SEPARATOR}}';
     
     /**
      * Shell script runner.

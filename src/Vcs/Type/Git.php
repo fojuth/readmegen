@@ -2,8 +2,6 @@
 
 class Git extends AbstractType
 {
-    const MSG_SEPARATOR = '{{MSG_SEPARATOR}}';
-    
     /**
      * Parses the log.
      * 

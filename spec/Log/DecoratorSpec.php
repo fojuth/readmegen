@@ -4,27 +4,25 @@ namespace spec\ReadmeGen\Log;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use ReadmeGen\Output\Format\FormatInterface;
 
 class DecoratorSpec extends ObjectBehavior
 {
-    protected $issueTrackerUrl = 'http://some.issue.tracker.com/show/';
 
-    function it_adds_links_to_issues()
+    function let(FormatInterface $formatter)
     {
-        $log = array(
-            'Features' => array(
-                'bar #123 baz',
-                'dummy feature',
-                'lol #404',
-            ),
-            'Bugfixes' => array(
-                'some bugfix #890',
-            ),
-        );
-
-        $this->setLog($log);
-        $this->setIssueLinkPattern($this->issueTrackerUrl.'\1');
-
-        $this->decorate()->shouldReturn();
+        $this->beConstructedWith($formatter);
     }
+
+    function it_should_set_the_correct_output_class(FormatInterface $formatter)
+    {
+        $formatter->setLog(array())->shouldBeCalled();
+        $formatter->setIssueTrackerUrlPattern('')->shouldBeCalled();
+        $formatter->decorate()->willReturn('foo');
+
+        $this->setLog(array());
+        $this->setIssueTrackerUrlPattern('');
+        $this->decorate()->shouldReturn('foo');
+    }
+
 }

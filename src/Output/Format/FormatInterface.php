@@ -8,4 +8,8 @@ interface FormatInterface {
 
     public function decorate();
 
+    public function generate();
+
+    public function getFileName();
+
 } 

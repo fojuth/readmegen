@@ -11,6 +11,8 @@ class Md implements FormatInterface
 
     protected $pattern;
 
+    protected $fileName = 'README.md';
+
     public function setLog(array $log = null)
     {
         $this->log = $log;
@@ -35,6 +37,14 @@ class Md implements FormatInterface
 
     protected function injectLinks(&$entry){
         $entry = preg_replace('/#(\d+)/', "[#\\1]({$this->pattern})", $entry);
+    }
+
+    public function generate(){
+        return 'foo';
+    }
+
+    public function getFileName(){
+        return $this->fileName;
     }
 
 }

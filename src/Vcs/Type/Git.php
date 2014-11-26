@@ -29,10 +29,6 @@ class Git extends AbstractType
      */
     public function getCommand()
     {
-        if (false === $this->hasArgument('from')) {
-            throw new \BadMethodCallException('The --from argument is required.');
-        }
-
         $options = $this->getOptions();
         $arguments = $this->getArguments();
 

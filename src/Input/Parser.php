@@ -16,6 +16,7 @@ class Parser
         $this->handler = new Getopt(array(
             new Option('f', 'from', Getopt::REQUIRED_ARGUMENT),
             new Option('t', 'to', Getopt::OPTIONAL_ARGUMENT),
+            new Option('b', 'break', Getopt::OPTIONAL_ARGUMENT),
         ));
     }
 

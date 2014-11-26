@@ -11,6 +11,8 @@ class GitSpec extends ObjectBehavior
     
     function it_should_parse_a_git_log(Shell $shell)
     {
+        $this->setArguments(array('from' => '1.0'));
+
         $log = sprintf("Foo bar.%s\nDummy message.%s\n\n", Git::MSG_SEPARATOR, Git::MSG_SEPARATOR);
         $shell->run($this->getCommand())->willReturn($log);
         
@@ -25,7 +27,7 @@ class GitSpec extends ObjectBehavior
     function it_has_input_options_and_arguments()
     {
         $this->setOptions(array('a'));
-        $this->setArguments(array('foo' => 'bar'));
+        $this->setArguments(array('foo' => 'bar', 'from' => '1.0'));
         
         $this->hasOption('z')->shouldReturn(false);
         $this->hasOption('a')->shouldReturn(true);
@@ -43,9 +45,23 @@ class GitSpec extends ObjectBehavior
         $this->setShellRunner($shell);
         
         $this->setOptions(array('x', 'y'));
-        $this->setArguments(array('foo' => 'bar', 'baz' => 'wat'));
+        $this->setArguments(array('foo' => 'bar', 'baz' => 'wat', 'from' => '1.0'));
         
-        $this->getCommand()->shouldReturn('git log --pretty=format:"%s{{MSG_SEPARATOR}}%b" --x --y --foo=bar --baz=wat');
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 1.0..HEAD --x --y --foo=bar --baz=wat');
+    }
+
+    function it_must_require_the_from_argument() {
+        $this->shouldThrow('\BadMethodCallException')->during('getCommand');
+    }
+
+    function it_should_properly_include_the_from_and_to_arguments() {
+        $this->setOptions(array('x', 'y'));
+
+        $this->setArguments(array('from' => '3.4.5', 'foo' => 'bar'));
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..HEAD --x --y --foo=bar');
+
+        $this->setArguments(array('from' => '3.4.5', 'foo' => 'bar', 'to' => '4.0'));
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..4.0 --x --y --foo=bar');
     }
     
 }

@@ -19,6 +19,9 @@
     "config": {
         "bin-dir": "bin"
     },
+    "bin": [
+        "generate"
+    ],
     "autoload": {
         "psr-4": {
             "ReadmeGen\\": "src/"

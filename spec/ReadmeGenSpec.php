@@ -7,11 +7,12 @@ namespace spec\ReadmeGen {
     use \ReadmeGen\Shell;
     use \ReadmeGen\Vcs\Type\Git;
     use \ReadmeGen\Log\Extractor;
+    use \ReadmeGen\Log\Decorator;
     use \ReadmeGen\Output\Format\Md;
+    use \ReadmeGen\Output\Writer;
 
     class ReadmeGenSpec extends ObjectBehavior
     {
-
         protected $dummyConfigFile = 'dummy_config.yaml';
         protected $dummyConfig = "vcs: dummyvcs\nfoo: bar\nmessage_groups:\n  Features:\n    - feat\n    - feature\n  Bugfixes:\n    - fix\n    - bugfix";
         protected $dummyConfigArray = array(
@@ -30,6 +31,7 @@ namespace spec\ReadmeGen {
         protected $badConfig = "vcs: nope\nfoo: bar";
         protected $gitConfigFile = 'git_config.yaml';
         protected $gitConfig = "vcs: git\nmessage_groups:\n  Features:\n    - feat\n    - feature\n  Bugfixes:\n    - fix\n    - bugfix\nformat: md\nissue_tracker_pattern: http://issue.tracker.com/\\1";
+        protected $outputFile = 'dummy.md';
 
         function let()
         {
@@ -43,6 +45,8 @@ namespace spec\ReadmeGen {
         {
             unlink($this->dummyConfigFile);
             unlink($this->badConfigFile);
+            @ unlink($this->gitConfigFile);
+            @ unlink($this->outputFile);
         }
 
         function it_should_load_default_config()
@@ -96,7 +100,10 @@ namespace spec\ReadmeGen {
                 )
             ));
 
-            $this->setDecorator(new Md());
+            $formatter = new Md();
+            $formatter->setFileName($this->outputFile);
+
+            $this->setDecorator(new Decorator($formatter));
             $this->getDecoratedMessages($logGrouped)->shouldReturn(array(
                 'Features' => array(
                     'bar baz [#123](http://issue.tracker.com/123)',
@@ -107,6 +114,11 @@ namespace spec\ReadmeGen {
                     'some bugfix',
                 )
             ));
+
+            $outputWriter = new Writer($formatter);
+
+            $this->setOutputWriter($outputWriter);
+            $this->writeOutput()->shouldReturn(true);
         }
 
         protected function getLogAsString()

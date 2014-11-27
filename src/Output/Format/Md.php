@@ -1,6 +1,5 @@
 <?php namespace ReadmeGen\Output\Format;
 
-use ReadmeGen\Output\Format\FormatInterface;
 use ReadmeGen\Vcs\Type\AbstractType as VCS;
 
 class Md implements FormatInterface
@@ -68,6 +67,13 @@ class Md implements FormatInterface
     public function getFileName()
     {
         return $this->fileName;
+    }
+
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+
+        return $this;
     }
 
 }

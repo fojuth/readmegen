@@ -27,10 +27,12 @@ class Writer
 
             file_put_contents($this->formatter->getFileName(), $splitFileContent[0].$this->break."\n".$log.$splitFileContent[1]);
 
-            return;
+            return true;
         }
 
         file_put_contents($this->formatter->getFileName(), $log.$fileContent);
+
+        return true;
     }
 
     protected function makeFile($fileName){

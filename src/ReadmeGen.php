@@ -3,6 +3,8 @@
 use ReadmeGen\Config\Loader as ConfigLoader;
 use ReadmeGen\Vcs\Parser;
 use ReadmeGen\Log\Extractor;
+use ReadmeGen\Log\Decorator;
+use ReadmeGen\Output\Writer as OutputWriter;
 
 class ReadmeGen
 {
@@ -50,9 +52,11 @@ class ReadmeGen
     /**
      * Message decorator.
      *
-     * @var Decorator
+     * @var \ReadmeGen\Log\Decorator
      */
     protected $decorator;
+
+    protected $output;
 
     public function __construct(ConfigLoader $configLoader, $defaultConfigPath = null)
     {
@@ -125,7 +129,7 @@ class ReadmeGen
      * @param \ReadmeGen\Output\Format\FormatInterface $decorator
      * @return $this
      */
-    public function setDecorator(\ReadmeGen\Output\Format\FormatInterface $decorator)
+    public function setDecorator(Decorator $decorator)
     {
         $this->decorator = $decorator;
 
@@ -141,5 +145,17 @@ class ReadmeGen
         return $this->decorator->setLog($log)
             ->setIssueTrackerUrlPattern($this->config['issue_tracker_pattern'])
             ->decorate();
+    }
+
+    public function setOutputWriter(OutputWriter $output)
+    {
+        $this->output = $output;
+
+        return $this;
+    }
+
+    public function writeOutput()
+    {
+        return $this->output->write();
     }
 }

@@ -27,4 +27,6 @@ interface FormatInterface {
      */
     public function getFileName();
 
+    public function setFileName($fileName);
+
 } 

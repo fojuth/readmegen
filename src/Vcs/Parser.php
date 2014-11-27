@@ -1,6 +1,7 @@
 <?php namespace ReadmeGen\Vcs;
 
 use ReadmeGen\Vcs\Type\TypeInterface;
+use ReadmeGen\Shell;
 
 /**
  * VCS log parser.
@@ -39,5 +40,26 @@ class Parser
     public function getVcsParser()
     {
         return $this->vcs;
+    }
+
+    public function setShellRunner(Shell $shell)
+    {
+        $this->vcs->setShellRunner($shell);
+
+        return $this;
+    }
+
+    public function setOptions(array $options = null)
+    {
+        $this->vcs->setOptions($options);
+
+        return $this;
+    }
+
+    public function setArguments(array $arguments = null)
+    {
+        $this->vcs->setArguments($arguments);
+
+        return $this;
     }
 }

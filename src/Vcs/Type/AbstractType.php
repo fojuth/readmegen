@@ -1,7 +1,6 @@
 <?php namespace ReadmeGen\Vcs\Type;
 
 use ReadmeGen\Shell;
-use ReadmeGen\Vcs\Type\TypeInterface;
 
 abstract class AbstractType implements TypeInterface
 {

@@ -20,7 +20,7 @@
         "bin-dir": "bin"
     },
     "bin": [
-        "generate"
+        "readmegen"
     ],
     "autoload": {
         "psr-4": {

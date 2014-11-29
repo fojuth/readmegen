@@ -12,7 +12,7 @@ class ReadmeGen
     /**
      * Path to the default config file.
      */
-    const DEFAULT_CONFIG_PATH = 'readmegen.yml';
+    protected $defaultConfigPath = 'readmegen.yml';
 
     /**
      * Config loader.
@@ -60,7 +60,9 @@ class ReadmeGen
 
     public function __construct(ConfigLoader $configLoader, $defaultConfigPath = null)
     {
-        $configPath = (false === empty($defaultConfigPath) ? $defaultConfigPath : self::DEFAULT_CONFIG_PATH);
+        $this->defaultConfigPath = realpath(__DIR__.'/../'.$this->defaultConfigPath);
+
+        $configPath = (false === empty($defaultConfigPath) ? $defaultConfigPath : $this->defaultConfigPath);
 
         $this->configLoader = $configLoader;
         $this->defaultConfig = $this->configLoader->get($configPath);

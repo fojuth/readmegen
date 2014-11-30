@@ -128,7 +128,7 @@ class ReadmeGen
      *
      * phpspec failed to properly resolve the aliased version of this interface.
      *
-     * @param \ReadmeGen\Output\Format\FormatInterface $decorator
+     * @param \ReadmeGen\Log\Decorator $decorator
      * @return $this
      */
     public function setDecorator(Decorator $decorator)

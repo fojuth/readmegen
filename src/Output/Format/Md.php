@@ -43,6 +43,10 @@ class Md implements FormatInterface
 
     public function generate()
     {
+        if (true === empty($this->log)) {
+            return array();
+        }
+
         $log = array();
 
         foreach ($this->log as $header => &$entries) {

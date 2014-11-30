@@ -3,6 +3,8 @@
 use ReadmeGen\Input\Parser;
 use ReadmeGen\Config\Loader as ConfigLoader;
 use ReadmeGen\Log\Extractor;
+use ReadmeGen\Log\Decorator;
+use ReadmeGen\Output\Writer;
 
 class Bootstrap
 {
@@ -34,8 +36,17 @@ class Bootstrap
         $logGrouped = $this->generator->setExtractor(new Extractor())
             ->extractMessages($log);
 
-        var_dump($logGrouped);
-        die;
+        $config = $this->generator->getConfig();
+
+        $formatterClassName = '\ReadmeGen\Output\Format\\' . $config['format'];
+
+        $formatter = new $formatterClassName;
+
+        $this->generator->setDecorator(new Decorator($formatter))
+            ->getDecoratedMessages($logGrouped);
+
+        $this->generator->setOutputWriter(new Writer($formatter))
+            ->writeOutput();
     }
 
-} 
+}

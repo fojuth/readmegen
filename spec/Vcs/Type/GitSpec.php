@@ -47,17 +47,17 @@ class GitSpec extends ObjectBehavior
         $this->setOptions(array('x', 'y'));
         $this->setArguments(array('foo' => 'bar', 'baz' => 'wat', 'from' => '1.0'));
         
-        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 1.0..HEAD --x --y --foo=bar --baz=wat');
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 1.0..HEAD --x --y');
     }
 
     function it_should_properly_include_the_from_and_to_arguments() {
         $this->setOptions(array('x', 'y'));
 
         $this->setArguments(array('from' => '3.4.5', 'foo' => 'bar'));
-        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..HEAD --x --y --foo=bar');
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..HEAD --x --y');
 
         $this->setArguments(array('from' => '3.4.5', 'foo' => 'bar', 'to' => '4.0'));
-        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..4.0 --x --y --foo=bar');
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..4.0 --x --y');
     }
     
 }

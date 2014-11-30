@@ -28,13 +28,8 @@ class Bootstrap
     {
         $this->generator = new ReadmeGen(new ConfigLoader());
 
-        $log = $this->generator->getParser()
-            ->setArguments($options)
-            ->setShellRunner(new Shell)
-            ->parse();
-
         $logGrouped = $this->generator->setExtractor(new Extractor())
-            ->extractMessages($log);
+            ->extractMessages($this->getLog($options));
 
         $config = $this->generator->getConfig();
 
@@ -47,6 +42,18 @@ class Bootstrap
 
         $this->generator->setOutputWriter(new Writer($formatter))
             ->writeOutput();
+    }
+
+    /**
+     * @param array $options
+     * @return mixed
+     */
+    public function getLog(array $options)
+    {
+        return $this->generator->getParser()
+            ->setArguments($options)
+            ->setShellRunner(new Shell)
+            ->parse();
     }
 
 }

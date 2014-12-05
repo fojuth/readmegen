@@ -60,18 +60,21 @@ class ReadmeGen
 
     public function __construct(ConfigLoader $configLoader, $defaultConfigPath = null)
     {
-        $this->defaultConfigPath = realpath(__DIR__.'/../'.$this->defaultConfigPath);
+        $rootConfigPath = realpath(__DIR__.'/../'.$this->defaultConfigPath);
 
-        $configPath = (false === empty($defaultConfigPath) ? $defaultConfigPath : $this->defaultConfigPath);
+        $configPath = (false === empty($defaultConfigPath) ? $defaultConfigPath : $rootConfigPath);
 
         $this->configLoader = $configLoader;
         $this->defaultConfig = $this->configLoader->get($configPath);
 
-        /**
-         * @todo This should be actually loading a local config file and merge it with the default config
-         * @see \ReadmeGen\Config\Loader::get() - this method can merge the configs
-         */
-        $this->config = $this->defaultConfig;
+        $localConfigPath = realpath($this->defaultConfigPath);
+
+        if (file_exists($localConfigPath)) {
+            $this->config = $this->configLoader->get($localConfigPath, $this->defaultConfig);
+        }
+        else {
+            $this->config = $this->defaultConfig;
+        }
     }
 
     /**

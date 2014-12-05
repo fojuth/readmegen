@@ -21,7 +21,7 @@ class Loader
         $config = Yaml::parse($this->getFileContent($path));
         
         if (false === empty($sourceConfig)) {
-            return array_replace_recursive($config, $sourceConfig);
+            return array_replace_recursive($sourceConfig, $config);
         }
         
         return $config;

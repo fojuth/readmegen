@@ -13,6 +13,8 @@ class Md implements FormatInterface
 
     protected $fileName = 'README.md';
 
+    protected $release;
+
     public function setLog(array $log = null)
     {
         $this->log = $log;
@@ -63,9 +65,9 @@ class Md implements FormatInterface
             }
         }
 
-        $log[] = "\n---";
+        $now = new \DateTime();
 
-        return $log;
+        return array_merge(array("## {$this->release}", "*({$now->format('Y-m-d')})*"), $log, array("\n---\n"));
     }
 
     public function getFileName()
@@ -78,6 +80,10 @@ class Md implements FormatInterface
         $this->fileName = $fileName;
 
         return $this;
+    }
+
+    public function setRelease($release) {
+        $this->release = $release;
     }
 
 }

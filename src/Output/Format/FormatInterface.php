@@ -29,4 +29,6 @@ interface FormatInterface {
 
     public function setFileName($fileName);
 
+    public function setRelease($release);
+
 } 

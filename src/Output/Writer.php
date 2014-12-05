@@ -43,9 +43,11 @@ class Writer
         touch($fileName);
     }
 
-    public function setBreak($break)
+    public function setBreak($break = null)
     {
-        $this->break = $break;
+        if (false === empty($break)) {
+            $this->break = $break;
+        }
 
         return $this;
     }

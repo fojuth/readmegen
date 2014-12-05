@@ -43,7 +43,13 @@ class Bootstrap
         $this->generator->setDecorator(new Decorator($formatter))
             ->getDecoratedMessages($logGrouped);
 
-        $this->generator->setOutputWriter(new Writer($formatter))
+        $writer = new Writer($formatter);
+
+        if (true === isset($options['break'])) {
+            $writer->setBreak($options['break']);
+        }
+
+        $this->generator->setOutputWriter($writer)
             ->writeOutput();
     }
 

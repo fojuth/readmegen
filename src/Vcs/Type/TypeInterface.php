@@ -43,6 +43,12 @@ interface TypeInterface
      */
     public function hasOption($option);
 
+    /**
+     * Returns all options.
+     *
+     * @return mixed
+     */
+    public function getOptions();
 
     /**
      * Returns true if an argument exists.
@@ -59,5 +65,12 @@ interface TypeInterface
      * @return mixed
      */
     public function getArgument($argument);
+
+    /**
+     * Return all arguments.
+     *
+     * @return mixed
+     */
+    public function getArguments();
     
 }

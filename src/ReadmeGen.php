@@ -119,6 +119,12 @@ class ReadmeGen
         return $this;
     }
 
+    /**
+     * Returns messages extracted from the log.
+     *
+     * @param array $log
+     * @return array
+     */
     public function extractMessages(array $log = null)
     {
         if (true === empty($log)) {
@@ -145,6 +151,12 @@ class ReadmeGen
         return $this;
     }
 
+    /**
+     * Returns decorated log messages.
+     *
+     * @param array $log
+     * @return array|Output\Format\FormatInterface
+     */
     public function getDecoratedMessages(array $log = null)
     {
         if (true === empty($log)) {
@@ -163,6 +175,11 @@ class ReadmeGen
         return $this;
     }
 
+    /**
+     * Writes the ready output to the file.
+     *
+     * @return mixed
+     */
     public function writeOutput()
     {
         return $this->output->write();

@@ -12,8 +12,19 @@ abstract class AbstractType implements TypeInterface
      * @var Shell
      */
     protected $shell;
-    
+
+    /**
+     * Input arguments.
+     *
+     * @var array
+     */
     protected $arguments = array();
+
+    /**
+     * Input arguments.
+     *
+     * @var array
+     */
     protected $options = array();
 
     /**
@@ -25,7 +36,13 @@ abstract class AbstractType implements TypeInterface
     {
         $this->shell = $shell;
     }
-    
+
+    /**
+     * Runs the shell command and returns the result.
+     *
+     * @param $command
+     * @return string
+     */
     protected function runCommand($command)
     {
         return $this->shell->run($command);

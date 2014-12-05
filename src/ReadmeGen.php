@@ -60,8 +60,11 @@ class ReadmeGen
 
     public function __construct(ConfigLoader $configLoader, $defaultConfigPath = null, $ignoreLocalConfig = false)
     {
+
+        // Root config path
         $rootConfigPath = realpath(__DIR__.'/../'.$this->defaultConfigPath);
 
+        // Overriding the root config
         $configPath = (false === empty($defaultConfigPath) ? $defaultConfigPath : $rootConfigPath);
 
         $this->configLoader = $configLoader;
@@ -69,6 +72,7 @@ class ReadmeGen
 
         $localConfigPath = realpath($this->defaultConfigPath);
 
+        // Merging local config
         if (file_exists($localConfigPath) && false === $ignoreLocalConfig) {
             $this->config = $this->configLoader->get($localConfigPath, $this->defaultConfig);
         }

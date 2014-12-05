@@ -42,6 +42,12 @@ class Parser
         return $this->vcs;
     }
 
+    /**
+     * Shell runner setter.
+     *
+     * @param Shell $shell
+     * @return $this
+     */
     public function setShellRunner(Shell $shell)
     {
         $this->vcs->setShellRunner($shell);
@@ -49,6 +55,12 @@ class Parser
         return $this;
     }
 
+    /**
+     * Sets input options.
+     *
+     * @param array $options
+     * @return $this
+     */
     public function setOptions(array $options = null)
     {
         $this->vcs->setOptions($options);
@@ -56,6 +68,12 @@ class Parser
         return $this;
     }
 
+    /**
+     * Sets input arguments.
+     *
+     * @param array $arguments
+     * @return $this
+     */
     public function setArguments(array $arguments = null)
     {
         $this->vcs->setArguments($arguments);

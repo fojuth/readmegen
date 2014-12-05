@@ -38,7 +38,7 @@ namespace spec\ReadmeGen {
             file_put_contents($this->dummyConfigFile, $this->dummyConfig);
             file_put_contents($this->badConfigFile, $this->badConfig);
 
-            $this->beConstructedWith(new ConfigLoader, $this->dummyConfigFile);
+            $this->beConstructedWith(new ConfigLoader, $this->dummyConfigFile, true);
         }
 
         function letgo()
@@ -66,8 +66,7 @@ namespace spec\ReadmeGen {
 
         function it_throws_exception_when_trying_to_load_nonexisting_vcs_parser()
         {
-            $this->beConstructedWith(new ConfigLoader, $this->badConfigFile);
-
+            $this->beConstructedWith(new ConfigLoader, $this->badConfigFile, true);
             $this->shouldThrow('\InvalidArgumentException')->during('getParser');
         }
 
@@ -77,7 +76,7 @@ namespace spec\ReadmeGen {
 
             $shell->run(sprintf('git log --pretty=format:"%%s%s%%b" 1.2.3..4.0.0', Git::MSG_SEPARATOR))->willReturn($this->getLogAsString());
 
-            $this->beConstructedWith(new ConfigLoader, $this->gitConfigFile);
+            $this->beConstructedWith(new ConfigLoader, $this->gitConfigFile, true);
 
             $this->getParser()->getVcsParser()->shouldHaveType('\ReadmeGen\Vcs\Type\Git');
             $this->getParser()->setArguments(array(
@@ -101,7 +100,9 @@ namespace spec\ReadmeGen {
             ));
 
             $formatter = new Md();
-            $formatter->setFileName($this->outputFile);
+            $formatter->setFileName($this->outputFile)
+                ->setRelease('4.5.6')
+                ->setDate(new \DateTime(2014-12-12));
 
             $this->setDecorator(new Decorator($formatter));
             $this->getDecoratedMessages($logGrouped)->shouldReturn(array(

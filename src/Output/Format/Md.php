@@ -15,6 +15,11 @@ class Md implements FormatInterface
 
     protected $release;
 
+    /**
+     * @var \DateTime
+     */
+    protected $date;
+
     public function setLog(array $log = null)
     {
         $this->log = $log;
@@ -65,9 +70,7 @@ class Md implements FormatInterface
             }
         }
 
-        $now = new \DateTime();
-
-        return array_merge(array("## {$this->release}", "*({$now->format('Y-m-d')})*"), $log, array("\n---\n"));
+        return array_merge(array("## {$this->release}", "*({$this->date->format('Y-m-d')})*"), $log, array("\n---\n"));
     }
 
     public function getFileName()
@@ -84,6 +87,14 @@ class Md implements FormatInterface
 
     public function setRelease($release) {
         $this->release = $release;
+
+        return $this;
+    }
+
+    public function setDate(\DateTime $date) {
+        $this->date = $date;
+
+        return $this;
     }
 
 }

@@ -42,14 +42,6 @@ class LoaderSpec extends ObjectBehavior
         $this->get($this->dummyConfigFile)->shouldHaveKey('vcs');
     }
 
-    function it_should_merge_config_files()
-    {
-        $config = $this->get($this->dummyConfigFile, array('vcs' => 'svn'));
-        
-        $config['vcs']->shouldBe('svn');
-        $config['foo']->shouldBe('bar');
-    }
-
     function getMatchers()
     {
         return array(

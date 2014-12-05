@@ -40,13 +40,18 @@ class MdSpec extends ObjectBehavior
     }
 
     function it_should_generate_a_write_ready_output() {
+        $this->setRelease('4.5.6')
+            ->setDate(new \DateTime('2014-12-21'));
+
         $result = array(
+            "## 4.5.6",
+            "*(2014-12-21)*",
             "\n#### Features",
             '* bar #123 baz',
             '* dummy feature',
             "\n#### Bugfixes",
             '* some bugfix (#890)',
-            "\n---",
+            "\n---\n",
         );
 
         $this->generate()->shouldReturn($result);

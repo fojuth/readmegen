@@ -37,7 +37,8 @@ class Bootstrap
 
         $formatter = new $formatterClassName;
 
-        $formatter->setRelease($options['release']);
+        $formatter->setRelease($options['release'])
+            ->setDate(new \DateTime());
 
         $this->generator->setDecorator(new Decorator($formatter))
             ->getDecoratedMessages($logGrouped);

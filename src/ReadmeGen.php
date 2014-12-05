@@ -58,7 +58,7 @@ class ReadmeGen
 
     protected $output;
 
-    public function __construct(ConfigLoader $configLoader, $defaultConfigPath = null)
+    public function __construct(ConfigLoader $configLoader, $defaultConfigPath = null, $ignoreLocalConfig = false)
     {
         $rootConfigPath = realpath(__DIR__.'/../'.$this->defaultConfigPath);
 
@@ -69,7 +69,7 @@ class ReadmeGen
 
         $localConfigPath = realpath($this->defaultConfigPath);
 
-        if (file_exists($localConfigPath)) {
+        if (file_exists($localConfigPath) && false === $ignoreLocalConfig) {
             $this->config = $this->configLoader->get($localConfigPath, $this->defaultConfig);
         }
         else {

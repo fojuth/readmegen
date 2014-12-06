@@ -62,7 +62,7 @@ class Writer
     /**
      * Create the file if it does not exist.
      *
-     * @param $fileName
+     * @param string $fileName
      */
     protected function makeFile($fileName){
         if (file_exists($fileName)) {

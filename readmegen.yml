@@ -8,7 +8,7 @@ message_groups:
   Bugfixes:
     - fix
     - bugfix
-  Documentations:
+  Documentation:
     - docs
   Refactoring:
     - refactoring

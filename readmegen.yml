@@ -1,0 +1,14 @@
+vcs: git
+format: md
+issue_tracker_pattern: http://some.issue.tracker.com/\1
+message_groups:
+  Features:
+    - feature
+    - feat
+  Bugfixes:
+    - fix
+    - bugfix
+  Documentation:
+    - docs
+  Refactoring:
+    - refactoring

@@ -3,3 +3,4 @@ vendor/
 bin/
 nbproject/
 composer.lock
+.idea/

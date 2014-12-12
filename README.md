@@ -101,7 +101,7 @@ For example:
 ```
 readmegen --from 1.12.0 --to 1.13.0 --release 1.3.3 --break *Changelog*
 ```
-The script will append the changes *below* the line that contains the "foobar" phrase. This should be the only phrase in this line.
+The script will append the changes *below* the line that contains the "foobar" phrase. This should be the only phrase in this line. The breakpoint **must not contain spaces**.
 
 ### Example commits
 Here are some example commit messages that will be grabbed by ReadmeGen (with the default config):

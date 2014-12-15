@@ -42,7 +42,7 @@ class Bootstrap
 
         $config = $this->generator->getConfig();
 
-        $formatterClassName = '\ReadmeGen\Output\Format\\' . $config['format'];
+        $formatterClassName = '\ReadmeGen\Output\Format\\' . ucfirst($config['format']);
 
         // Create the output formatter
         $formatter = new $formatterClassName;

@@ -80,4 +80,13 @@ class Parser
 
         return $this;
     }
+
+    /**
+     * Returns the date of the latter (--to) commit, in the format YYYY-MM-DD.
+     *
+     * @return string
+     */
+    public function getToDate(){
+        return $this->vcs->getToDate();
+    }
 }

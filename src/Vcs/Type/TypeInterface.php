@@ -76,7 +76,7 @@ interface TypeInterface
     /**
      * Returns the date of the latter (--to) commit, in the format YYYY-MM-DD.
      *
-     * @return mixed
+     * @return string
      */
     public function getToDate();
     

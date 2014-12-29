@@ -154,6 +154,10 @@ namespace ReadmeGen\Vcs\Type {
             return array();
         }
 
+        public function getToDate(){
+            
+        }
+
     }
 
 }

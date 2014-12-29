@@ -36,9 +36,11 @@ class Bootstrap
     {
         $this->generator = new ReadmeGen(new ConfigLoader());
 
+        $this->setupParser($options);
+
         // Extract useful log entries
         $logGrouped = $this->generator->setExtractor(new Extractor())
-            ->extractMessages($this->getLog($options));
+            ->extractMessages($this->getLog());
 
         $config = $this->generator->getConfig();
 
@@ -48,7 +50,7 @@ class Bootstrap
         $formatter = new $formatterClassName;
 
         $formatter->setRelease($options['release'])
-            ->setDate(new \DateTime());
+            ->setDate($this->getToDate());
 
         // Pass decorated log entries to the generator
         $this->generator->setDecorator(new Decorator($formatter))
@@ -69,15 +71,35 @@ class Bootstrap
     /**
      * Returns the parsed log.
      *
-     * @param array $options
      * @return mixed
      */
-    public function getLog(array $options)
+    public function getLog()
     {
         return $this->generator->getParser()
-            ->setArguments($options)
-            ->setShellRunner(new Shell)
             ->parse();
+    }
+
+    /**
+     * Returns the date of the latter commit (--to).
+     *
+     * @return string
+     */
+    protected function getToDate(){
+        $date = $this->generator->getParser()
+            ->getToDate();
+
+        return new \DateTime($date);
+    }
+
+    /**
+     * Sets the parser.
+     *
+     * @param array $options
+     */
+    protected function setupParser(array $options){
+        $this->generator->getParser()
+            ->setArguments($options)
+            ->setShellRunner(new Shell);
     }
 
 }

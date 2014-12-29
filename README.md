@@ -111,3 +111,14 @@ fix: #4245, regarding client login bug
 docs: Updated the transaction section of the docs
 feat: Some more cool stuff
 ```
+
+__Changelog__
+## 1.0.2
+*(2014-12-30)*
+
+#### Bugfixes
+* The release date is extracted from the --to commit.
+
+---
+
+

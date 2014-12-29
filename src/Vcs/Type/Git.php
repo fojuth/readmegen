@@ -62,4 +62,16 @@ class Git extends AbstractType
         return $range . (($to) ?: 'HEAD');
     }
 
+
+    public function getToDate()
+    {
+        $arguments = $this->getArguments();
+
+        $to = (true === isset($arguments['to'])) ? $arguments['to'] : 'HEAD';
+
+        $fullDate = $this->runCommand(sprintf('git log -1 -s --format=%%ci %s', $to));
+        $date = explode(' ', $fullDate);
+
+        return $date[0];
+    }
 }

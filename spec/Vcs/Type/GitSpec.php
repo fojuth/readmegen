@@ -59,5 +59,14 @@ class GitSpec extends ObjectBehavior
         $this->setArguments(array('from' => '3.4.5', 'foo' => 'bar', 'to' => '4.0'));
         $this->getCommand()->shouldReturn('git log --pretty=format:"%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..4.0 --x --y');
     }
+
+    function it_returns_the_date_of_the_commit(Shell $shell) {
+        $shell->run('git log -1 -s --format=%ci 3f04264')->willReturn('2014-11-28 01:01:58 +0100');
+
+        $this->setShellRunner($shell);
+
+        $this->setArguments(array('from' => '1.0', 'to' => '3f04264'));
+        $this->getToDate()->shouldReturn('2014-11-28');
+    }
     
 }

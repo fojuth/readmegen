@@ -72,5 +72,12 @@ interface TypeInterface
      * @return mixed
      */
     public function getArguments();
+
+    /**
+     * Returns the date of the latter (--to) commit, in the format YYYY-MM-DD.
+     *
+     * @return string
+     */
+    public function getToDate();
     
 }

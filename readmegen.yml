@@ -1,6 +1,7 @@
 vcs: git
 format: md
 issue_tracker_pattern: http://some.issue.tracker.com/\1
+break: "## Changelog"
 message_groups:
   Features:
     - feature

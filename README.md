@@ -120,9 +120,16 @@ docs: Updated the transaction section of the docs
 feat: Some more cool stuff
 ```
 
+## Changelog
+## 1.1.0
+*(2014-12-30)*
+
+#### Features
+* Added "break" to the readmegen.yml default config file. It has a default value set and can be overwritten locally.
+
 ---
 
-## Changelog
+
 ## 1.0.2
 *(2014-12-30)*
 

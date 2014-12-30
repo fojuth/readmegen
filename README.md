@@ -9,7 +9,7 @@ ReadmeGen is a PHP package that scans the VCS's log searching for messages with 
 ### Installation
 #### Global installation (recommended)
 ```
-composer global require fojuth/readmegen:1.*
+composer global require fojuth/readmegen:@stable
 ```
 
 You can read more about global installation in the [composer docs](https://getcomposer.org/doc/03-cli.md#global).
@@ -45,6 +45,11 @@ If you want to generate the changelog from a specific tag (or commit checksum) u
 readmegen --from a04cf99 --release 1.13.0 --break *Changelog*
 ```
 
+You can also specify the breakpoint in the `readmegen.yml` config file so the command will be even cleaner:
+```
+readmegen --from a04cf99 --release 1.13.0
+```
+
 ### Message format
 ReadmeGen will search for messages that start with a specific keyword. These keywords tell the script to which group the commit should be appended. The message groups can be overwritten.
 
@@ -76,6 +81,7 @@ The default `readmegen.yml` config looks like this:
 vcs: git
 format: md
 issue_tracker_pattern: http://some.issue.tracker.com/\1
+break: "## Changelog"
 message_groups:
   Features:
     - feature
@@ -95,13 +101,15 @@ Each of the `message_groups` key is the name of the group that will be put in th
 ReadmeGen requires a release number (`--release`) to be provided. This will be the title of the generated changelog.
 
 ### Breakpoint
-By default the changes will go onto the beginning of the changelog file. You can though specify a "breakpoint" beneath which these changes should be appended to. Usually, you'll have some "intro" in you changelog, and the changes listed below. You don't want the script to push the changes on top of the file, but below a certain line. You can specify this line using the `--break` argument.
+By default the changes will go onto the beginning of the changelog file. You can though specify a "breakpoint" beneath which these changes should be appended. Usually, you'll have some "intro" in you changelog, and the changes listed below. You don't want the script to push the changes on top of the file, but below a certain line. You can specify this line in the `readmegen.yml` config file or using the `--break` argument.
 
 For example:
 ```
 readmegen --from 1.12.0 --to 1.13.0 --release 1.3.3 --break *Changelog*
 ```
-The script will append the changes *below* the line that contains the "foobar" phrase. This should be the only phrase in this line. The breakpoint **must not contain spaces**.
+The script will append the changes *below* the line that contains the `*Changelog*` phrase. This should be the only phrase in this line. If you use the CLI argument method (`--break`), the breakpoint **must not contain spaces**. Thus you are encouraged to use the config method - you can use spaces there, as shown in the default config.
+
+ReadmeGen will search for the `## Changelog` breakpoint by default. If the breakpoint phrase is not found, the output will go onto the beginning of the changelog file.
 
 ### Example commits
 Here are some example commit messages that will be grabbed by ReadmeGen (with the default config):
@@ -112,7 +120,9 @@ docs: Updated the transaction section of the docs
 feat: Some more cool stuff
 ```
 
-__Changelog__
+---
+
+## Changelog
 ## 1.0.2
 *(2014-12-30)*
 

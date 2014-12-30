@@ -59,8 +59,10 @@ class Bootstrap
         $writer = new Writer($formatter);
 
         // If present, respect the breakpoint in the existing output file
-        if (true === isset($options['break'])) {
-            $writer->setBreak($options['break']);
+        $break = $this->getBreak($options, $config);
+
+        if (false === empty($break)) {
+            $writer->setBreak($break);
         }
 
         // Write the output
@@ -84,7 +86,8 @@ class Bootstrap
      *
      * @return string
      */
-    protected function getToDate(){
+    protected function getToDate()
+    {
         $date = $this->generator->getParser()
             ->getToDate();
 
@@ -96,10 +99,30 @@ class Bootstrap
      *
      * @param array $options
      */
-    protected function setupParser(array $options){
+    protected function setupParser(array $options)
+    {
         $this->generator->getParser()
             ->setArguments($options)
             ->setShellRunner(new Shell);
+    }
+
+    /**
+     * Returns the breakpoint if set, null otherwise.
+     *
+     * @param array $options
+     * @param array $config
+     * @return null|string
+     */
+    protected function getBreak(array $options, array $config){
+        if (true === isset($options['break'])) {
+            return $options['break'];
+        }
+
+        if (true === isset($config['break'])) {
+            return $config['break'];
+        }
+
+        return null;
     }
 
 }

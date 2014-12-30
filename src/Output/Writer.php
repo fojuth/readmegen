@@ -46,8 +46,8 @@ class Writer
         $log = join("\n", (array) $this->formatter->generate())."\n";
 
         // Include the breakpoint
-        if (false === empty($this->break) && strstr($fileContent, $this->break)) {
-            $splitFileContent = explode($this->break, $fileContent);
+        if (false === empty($this->break) && 1 === preg_match("/^{$this->break}/m", $fileContent)) {
+            $splitFileContent = preg_split("/^{$this->break}/m", $fileContent);
 
             file_put_contents($this->formatter->getFileName(), $splitFileContent[0].$this->break."\n".$log.$splitFileContent[1]);
 

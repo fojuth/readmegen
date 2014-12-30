@@ -13,7 +13,7 @@ class WriterSpec extends ObjectBehavior
     function let(FormatInterface $formatter)
     {
         $this->beConstructedWith($formatter);
-        file_put_contents($this->fileNameWithBreakpoint, "line one\n{$this->break}\nline two");
+        file_put_contents($this->fileNameWithBreakpoint, "line one\n{$this->break}\nline two\n##{$this->break}\nline three");
     }
 
     function letgo()
@@ -65,7 +65,9 @@ class WriterSpec extends ObjectBehavior
             '- foo',
             '- bar',
             '',
-            'line two'
+            'line two',
+            '##'.$this->break,
+            'line three',
         );
 
         $formatter->generate()->willReturn($logContent);

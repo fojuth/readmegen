@@ -1,6 +1,6 @@
 # ReadmeGen
 
-[![Build Status](https://travis-ci.org/fojuth/readmegen.svg?branch=master)](https://travis-ci.org/fojuth/readmegen)
+[![Build Status](https://travis-ci.org/fojuth/readmegen.svg)](https://travis-ci.org/fojuth/readmegen)
 
 Generate your project's log using VCS commit messages.
 

@@ -49,7 +49,9 @@ class Bootstrap
         // Create the output formatter
         $formatter = new $formatterClassName;
 
-        $formatter->setRelease($options['release'])
+        $formatter
+            ->setRelease($options['release'])
+            ->setFileName($config['output_file_name'])
             ->setDate($this->getToDate());
 
         // Pass decorated log entries to the generator

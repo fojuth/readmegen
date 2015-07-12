@@ -19,7 +19,7 @@ if (!$loaded) {
 }
 
 if (2 > count($argv)) {
-    die('Example usage: php generate.php --from <tag / commit> --release <release number>');
+    die("Example usage: php generate.php --from <tag / commit> --release <release number>\n");
 }
 
 new \ReadmeGen\Bootstrap($argv);

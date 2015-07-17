@@ -124,6 +124,25 @@ feat: Some more cool stuff
 ```
 
 ## Changelog
+## 1.1.2
+*(2015-01-04)*
+
+#### Features
+* Change output file name (thanks to [reva2](https://github.com/reva2))
+
+#### Bugfixes
+* Added missing new line character in example usage message (thanks to [reva2](https://github.com/reva2))
+
+---
+
+## 1.1.1
+*(2015-01-04)*
+
+#### Features
+* Added .travis.yml
+
+---
+
 ## 1.1.0
 *(2014-12-30)*
 
@@ -132,7 +151,6 @@ feat: Some more cool stuff
 
 ---
 
-
 ## 1.0.2
 *(2014-12-30)*
 
@@ -140,5 +158,3 @@ feat: Some more cool stuff
 * The release date is extracted from the --to commit.
 
 ---
-
-

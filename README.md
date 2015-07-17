@@ -125,7 +125,7 @@ feat: Some more cool stuff
 
 ## Changelog
 ## 1.1.2
-*(2015-01-04)*
+*(2015-07-12)*
 
 #### Features
 * Change output file name (thanks to [reva2](https://github.com/reva2))

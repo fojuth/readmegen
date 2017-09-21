@@ -2,6 +2,14 @@
 
 [![Build Status](https://travis-ci.org/fojuth/readmegen.svg)](https://travis-ci.org/fojuth/readmegen)
 
+## MAINTAINER NEEDED
+
+Sadly, I don't have the time to develop **readmegen**. It's great to see it's being used by many people! It would be sad if this project would die. Maybe you can help? There's not much work to do, since the community is very helpful and provides PRs.
+
+If you're willing to push **readmegen** further on, let me know.
+
+---
+
 Generate your project's log using VCS commit messages.
 
 ReadmeGen is a PHP package that scans the VCS's log searching for messages with specific pattern. These messages are extracted, grouped and prepended to the changelog file (e.g. readme.md). The package can be instructed to fetch messages between specific tags (or commits). This way, whenever you're tagging a new release, you can run ReadmeGen to generate the changelog automatically.

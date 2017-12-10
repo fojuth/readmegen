@@ -14,9 +14,10 @@
         "ulrichsg/getopt-php": "2.*"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-master"
+        "phpspec/phpspec": "^2.5"
     },
     "config": {
+        "platform": {"php": "5.3.9"},
         "bin-dir": "bin"
     },
     "bin": [

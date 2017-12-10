@@ -132,6 +132,15 @@ feat: Some more cool stuff
 ```
 
 ## Changelog
+## 1.2.0
+*(2017-12-10)*
+
+#### Bugfixes
+* Use symfony yaml 3.2
+* Use phpspec version ^2.5 ((thanks to [murrant](https://github.com/murrant)))
+
+---
+
 ## 1.1.2
 *(2015-07-12)*
 

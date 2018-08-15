@@ -4,6 +4,23 @@ issue_tracker_pattern: http://some.issue.tracker.com/\1
 break: "## Changelog"
 output_file_name: "README.md"
 message_groups:
+  Added:
+    - added
+    - add
+  Changed:
+    - changed
+    - change
+  Deprecated:
+    - deprecated
+    - deprecate
+  Removed:
+    - removed
+    - remove
+  Fixed:
+    - fixed
+    - fix
+  Security:
+    - security
   Features:
     - feature
     - feat

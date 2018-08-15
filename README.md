@@ -132,6 +132,23 @@ feat: Some more cool stuff
 ```
 
 ## Changelog
+## 1.1.3
+*(2018-08-16)*
+
+#### Added
+* Added message groups according to https://keepachangelog.com/
+
+#### Fixed
+* Use symfony yaml to 3.2
+* Use phpspec version ^2.5
+
+#### Bugfixes
+* Use symfony yaml to 3.2
+* Use phpspec version ^2.5
+
+---
+
+
 ## 1.2.0
 *(2017-12-10)*
 

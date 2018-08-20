@@ -77,8 +77,7 @@ class Extractor {
                 $pattern = $this->getPattern($keywords);
 
                 if (preg_match($pattern, $line)) {
-                    $this->appendToGroup($header, array($commit => $line), $pattern);
-                    // $this->appendToGroup($header, $line, $pattern);
+                    $this->appendToGroup($header, $line, $pattern, $commit);
                 }
             }
         }
@@ -101,8 +100,8 @@ class Extractor {
      * @param string $text
      * @param string $pattern
      */
-    protected function appendToGroup($groupHeader, $text, $pattern) {
-        $this->groups[$groupHeader][reset(array_keys($text))] = trim(preg_replace($pattern, '', reset(array_values($text))));
+    protected function appendToGroup($groupHeader, $text, $pattern, $commit) {
+        $this->groups[$groupHeader][$commit] = trim(preg_replace($pattern, '', $text));
     }
 
     /**

@@ -12,12 +12,12 @@ class ExtractorSpec extends ObjectBehavior
     {
         $log = array(
             'foo',
-            'feature: bar baz',
+            'hashcommitx' => 'feature: bar baz',
             'nope',
-            'feature: dummy feature',
-            'feat: lol',
+            'hashcommity' => 'feature: dummy feature',
+            'hashcommitz' => 'feat: lol',
             'also nope',
-            'fix: some bugfix',
+            'hashcommitw' => 'fix: some bugfix',
         );
 
         $messageGroups = array(
@@ -28,12 +28,12 @@ class ExtractorSpec extends ObjectBehavior
 
         $result = array(
             'Features' => array(
-                'bar baz',
-                'dummy feature',
-                'lol',
+                'hashcommitx' => 'bar baz',
+                'hashcommity' => 'dummy feature',
+                'hashcommitz' => 'lol',
             ),
             'Bugfixes' => array(
-                'some bugfix',
+                'hashcommitw' => 'some bugfix',
             ),
         );
 

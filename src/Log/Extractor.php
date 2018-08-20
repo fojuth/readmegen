@@ -72,12 +72,13 @@ class Extractor {
      * @return array
      */
     public function extract() {
-        foreach ($this->log as $line) {
+        foreach ($this->log as $commit => $line) {
             foreach ($this->messageGroupsJoined as $header => $keywords) {
                 $pattern = $this->getPattern($keywords);
 
                 if (preg_match($pattern, $line)) {
-                    $this->appendToGroup($header, $line, $pattern);
+                    $this->appendToGroup($header, array($commit => $line), $pattern);
+                    // $this->appendToGroup($header, $line, $pattern);
                 }
             }
         }
@@ -101,7 +102,7 @@ class Extractor {
      * @param string $pattern
      */
     protected function appendToGroup($groupHeader, $text, $pattern) {
-        $this->groups[$groupHeader][] = trim(preg_replace($pattern, '', $text));
+        $this->groups[$groupHeader][reset(array_keys($text))] = trim(preg_replace($pattern, '', reset(array_values($text))));
     }
 
     /**

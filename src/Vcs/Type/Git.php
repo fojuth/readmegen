@@ -9,7 +9,14 @@ class Git extends AbstractType
      */
     public function parse()
     {
-        return array_filter(array_map('trim', explode(self::MSG_SEPARATOR, $this->getLog())));
+        $hash = function($entry){
+            // return (substr($entry, 0,preg_match('/[a-zA-Z0-9]/', $entry) ? trim(substr($entry, 0, 40)) : "");
+            return trim(substr($entry, 0, 40));
+        };
+        $msgs = function($entry){
+            return trim(substr($entry, 41));
+        };
+        return array_filter(array_combine(array_map($hash, explode(self::MSG_SEPARATOR, $this->getLog())), array_map($msgs, explode(self::MSG_SEPARATOR, $this->getLog()))));
     }
 
     /**
@@ -19,7 +26,8 @@ class Git extends AbstractType
      */
     protected function getBaseCommand()
     {
-        return 'git log --pretty=format:"%s{{MSG_SEPARATOR}}%b"';
+        // return 'git log --pretty=format:"%s{{MSG_SEPARATOR}}%b"';
+        return 'git log --pretty=format:"%H %s{{MSG_SEPARATOR}}%b"';
     }
 
     /**

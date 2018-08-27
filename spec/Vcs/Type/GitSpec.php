@@ -13,14 +13,14 @@ class GitSpec extends ObjectBehavior
     {
         $this->setArguments(array('from' => '1.0'));
 
-        $log = sprintf("hashcommitx Foo bar.%s\nhashcommity Dummy message.%s\n\n", Git::MSG_SEPARATOR, Git::MSG_SEPARATOR);
+        $log = sprintf("51965ea1b5ad335eeba3c2781812cec2ff8027c4 Foo bar.%s51965ea1b5ad335eeba3c2781812cec2ff8027c4 Dummy message.%s\n\n", Git::MSG_SEPARATOR, Git::MSG_SEPARATOR);
         $shell->run($this->getCommand())->willReturn($log);
         
         $this->setShellRunner($shell);
         
         $this->parse()->shouldReturn(array(
-            'hashcommitx Foo bar.',
-            'hashcommity Dummy message.',
+            '51965ea1b5ad335eeba3c2781812cec2ff8027c4' => 'Foo bar.',
+            '51965ea1b5ad335eeba3c2781812cec2ff8027c4' => 'Dummy message.',
         ));
     }
     

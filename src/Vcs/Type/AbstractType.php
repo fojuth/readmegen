@@ -5,6 +5,7 @@ use ReadmeGen\Shell;
 abstract class AbstractType implements TypeInterface
 {
     const MSG_SEPARATOR = '{{MSG_SEPARATOR}}';
+    const HASH_SEPARATOR = '{{HASH_SEPARATOR}}';
     
     /**
      * Shell script runner.

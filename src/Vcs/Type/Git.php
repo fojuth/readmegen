@@ -10,15 +10,15 @@ class Git extends AbstractType
     public function parse()
     {
         $hash = function($entry){
-            $hash = explode(self::HASH_SEPARATOR, $entry);
+            $hash = explode(Git::HASH_SEPARATOR, $entry);
             return preg_replace('/\n/', '', $hash[0]);
         };
         $msgs = function($entry){
-            $commit = explode(self::HASH_SEPARATOR, $entry);
-            return (count(explode(self::HASH_SEPARATOR, $entry)) >=2 ? $commit[1] : null);
+            $commit = explode(Git::HASH_SEPARATOR, $entry);
+            return (count(explode(Git::HASH_SEPARATOR, $entry)) >=2 ? $commit[1] : null);
         };
 
-        return array_filter(array_combine(array_map($hash, explode(self::MSG_SEPARATOR, $this->getLog())), array_map($msgs, explode(self::MSG_SEPARATOR, $this->getLog()))));
+        return array_filter(array_combine(array_map($hash, explode(Git::MSG_SEPARATOR, $this->getLog())), array_map($msgs, explode(Git::MSG_SEPARATOR, $this->getLog()))));
     }
 
     /**

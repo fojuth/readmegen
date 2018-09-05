@@ -74,7 +74,8 @@ namespace spec\ReadmeGen {
         {
             file_put_contents($this->gitConfigFile, $this->gitConfig);
 
-            $shell->run(sprintf('git log --pretty=format:"%%s%s%%b" 1.2.3..4.0.0', Git::MSG_SEPARATOR))->willReturn($this->getLogAsString());
+            $shell->beADoubleOf('\ReadmeGen\Shell');
+            $shell->run(sprintf('git log --pretty=format:"%%H%s%%s%s%%b" 1.2.3..4.0.0', Git::HASH_SEPARATOR, Git::MSG_SEPARATOR))->willReturn($this->getLogAsString());
 
             $this->beConstructedWith(new ConfigLoader, $this->gitConfigFile, true);
 
@@ -90,12 +91,12 @@ namespace spec\ReadmeGen {
             $this->setExtractor(new Extractor());
             $logGrouped = $this->extractMessages($log)->shouldReturn(array(
                 'Features' => array(
-                    'bar baz #123',
-                    'dummy feature',
-                    'lol',
+                    'bb7c79afde2bf58639685fd52b799759a29f50ce' => 'bar baz #123',
+                    'a5b30e2924f76f726d542206c7deb105d4639921' => 'dummy feature',
+                    '15183406d1b2c2ee48ea6fb031497256f56a0b03' => 'lol',
                 ),
                 'Bugfixes' => array(
-                    'some bugfix',
+                    'f17260784504d00c6230ef62d9815c49f742f67d' => 'some bugfix',
                 )
             ));
 
@@ -107,12 +108,12 @@ namespace spec\ReadmeGen {
             $this->setDecorator(new Decorator($formatter));
             $this->getDecoratedMessages($logGrouped)->shouldReturn(array(
                 'Features' => array(
-                    'bar baz [#123](http://issue.tracker.com/123)',
-                    'dummy feature',
-                    'lol',
+                    'bb7c79afde2bf58639685fd52b799759a29f50ce' => 'bar baz [#123](http://issue.tracker.com/123)',
+                    'a5b30e2924f76f726d542206c7deb105d4639921' => 'dummy feature',
+                    '15183406d1b2c2ee48ea6fb031497256f56a0b03' => 'lol',
                 ),
                 'Bugfixes' => array(
-                    'some bugfix',
+                    'f17260784504d00c6230ef62d9815c49f742f67d' => 'some bugfix',
                 )
             ));
 
@@ -125,16 +126,16 @@ namespace spec\ReadmeGen {
         protected function getLogAsString()
         {
             $log = array(
-                'foo',
-                'feature: bar baz #123',
-                'nope',
-                'feature: dummy feature',
-                'feat: lol',
-                'also nope',
-                'fix: some bugfix',
+                '719febf5f1dd188b6e51e1ff2dfebe915ad557c5' . Git::HASH_SEPARATOR . 'foo',
+                'bb7c79afde2bf58639685fd52b799759a29f50ce' . Git::HASH_SEPARATOR . 'feature: bar baz #123',
+                'ffe0a1ed7d04462ecd55196d594a9ac76ff59545' . Git::HASH_SEPARATOR . 'nope',
+                'a5b30e2924f76f726d542206c7deb105d4639921' . Git::HASH_SEPARATOR . 'feature: dummy feature',
+                '15183406d1b2c2ee48ea6fb031497256f56a0b03' . Git::HASH_SEPARATOR . 'feat: lol',
+                'f2d7800de958bdc381da1e8fbb19d50c6f4ce279' . Git::HASH_SEPARATOR . 'also nope',
+                'f17260784504d00c6230ef62d9815c49f742f67d' . Git::HASH_SEPARATOR . 'fix: some bugfix',
             );
 
-            return join(Git::MSG_SEPARATOR."\n", $log).Git::MSG_SEPARATOR."\n";
+            return join(Git::MSG_SEPARATOR/*."\n"*/, $log).Git::MSG_SEPARATOR."\n";
         }
 
     }

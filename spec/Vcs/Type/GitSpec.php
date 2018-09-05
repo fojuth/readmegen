@@ -13,7 +13,7 @@ class GitSpec extends ObjectBehavior
     {
         $this->setArguments(array('from' => '1.0'));
 
-        $log = sprintf("51965ea1b5ad335eeba3c2781812cec2ff8027c4 Foo bar.%s51965ea1b5ad335eeba3c2781812cec2ff8027c4 Dummy message.%s\n\n", Git::MSG_SEPARATOR, Git::MSG_SEPARATOR);
+        $log = sprintf("51965ea1b5ad335eeba3c2781812cec2ff8027c4%sFoo bar.%s51965ea1b5ad335eeba3c2781812cec2ff8027c4%sDummy message.%s\n\n", Git::HASH_SEPARATOR, Git::MSG_SEPARATOR, Git::HASH_SEPARATOR, Git::MSG_SEPARATOR);
         $shell->run($this->getCommand())->willReturn($log);
         
         $this->setShellRunner($shell);
@@ -47,17 +47,17 @@ class GitSpec extends ObjectBehavior
         $this->setOptions(array('x', 'y'));
         $this->setArguments(array('foo' => 'bar', 'baz' => 'wat', 'from' => '1.0'));
         
-        $this->getCommand()->shouldReturn('git log --pretty=format:"%H %s'.Git::MSG_SEPARATOR.'%b" 1.0..HEAD --x --y');
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%H' . Git::HASH_SEPARATOR . '%s'.Git::MSG_SEPARATOR.'%b" 1.0..HEAD --x --y');
     }
 
     function it_should_properly_include_the_from_and_to_arguments() {
         $this->setOptions(array('x', 'y'));
 
         $this->setArguments(array('from' => '3.4.5', 'foo' => 'bar'));
-        $this->getCommand()->shouldReturn('git log --pretty=format:"%H %s'.Git::MSG_SEPARATOR.'%b" 3.4.5..HEAD --x --y');
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%H' . Git::HASH_SEPARATOR . '%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..HEAD --x --y');
 
         $this->setArguments(array('from' => '3.4.5', 'foo' => 'bar', 'to' => '4.0'));
-        $this->getCommand()->shouldReturn('git log --pretty=format:"%H %s'.Git::MSG_SEPARATOR.'%b" 3.4.5..4.0 --x --y');
+        $this->getCommand()->shouldReturn('git log --pretty=format:"%H' . Git::HASH_SEPARATOR . '%s'.Git::MSG_SEPARATOR.'%b" 3.4.5..4.0 --x --y');
     }
 
     function it_returns_the_date_of_the_commit(Shell $shell) {

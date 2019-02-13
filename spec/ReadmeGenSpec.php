@@ -97,6 +97,7 @@ namespace spec\ReadmeGen {
                 ),
                 'Bugfixes' => array(
                     'some bugfix',
+                    'fixed by foobar'
                 )
             ));
 
@@ -114,6 +115,7 @@ namespace spec\ReadmeGen {
                 ),
                 'Bugfixes' => array(
                     'some bugfix',
+                    'fixed by foobar'
                 )
             ));
 
@@ -133,6 +135,7 @@ namespace spec\ReadmeGen {
                 'feat: lol',
                 'also nope',
                 'fix: some bugfix',
+                'bugfix(foobar): fixed by foobar'
             );
 
             return join(Git::MSG_SEPARATOR."\n", $log).Git::MSG_SEPARATOR."\n";

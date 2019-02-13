@@ -74,6 +74,7 @@ namespace spec\ReadmeGen {
         {
             file_put_contents($this->gitConfigFile, $this->gitConfig);
 
+            $shell->beADoubleOf('\ReadmeGen\Shell');
             $shell->run(sprintf('git log --pretty=format:"%%s%s%%b" 1.2.3..4.0.0', Git::MSG_SEPARATOR))->willReturn($this->getLogAsString());
 
             $this->beConstructedWith(new ConfigLoader, $this->gitConfigFile, true);

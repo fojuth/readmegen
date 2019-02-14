@@ -111,7 +111,6 @@ class Extractor {
      * @return string
      */
     protected function getPattern($keywords) {
-        // return '/^('.$keywords.'):/i';
         return '/(^('.$keywords.')?\([^()]*[^()]*\):)|(^('.$keywords.'):)/i';
     }
 }

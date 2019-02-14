@@ -129,6 +129,7 @@ feature: Added some cool stuff (#1234)
 fix: #4245, regarding client login bug
 docs: Updated the transaction section of the docs
 feat: Some more cool stuff
+feat(username): Here is more some cool stuffs done by username
 ```
 
 ## Changelog

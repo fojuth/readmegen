@@ -74,6 +74,7 @@ namespace spec\ReadmeGen {
         {
             file_put_contents($this->gitConfigFile, $this->gitConfig);
 
+            $shell->beADoubleOf('\ReadmeGen\Shell');
             $shell->run(sprintf('git log --pretty=format:"%%s%s%%b" 1.2.3..4.0.0', Git::MSG_SEPARATOR))->willReturn($this->getLogAsString());
 
             $this->beConstructedWith(new ConfigLoader, $this->gitConfigFile, true);
@@ -96,6 +97,7 @@ namespace spec\ReadmeGen {
                 ),
                 'Bugfixes' => array(
                     'some bugfix',
+                    'fixed by foobar'
                 )
             ));
 
@@ -113,6 +115,7 @@ namespace spec\ReadmeGen {
                 ),
                 'Bugfixes' => array(
                     'some bugfix',
+                    'fixed by foobar'
                 )
             ));
 
@@ -132,6 +135,7 @@ namespace spec\ReadmeGen {
                 'feat: lol',
                 'also nope',
                 'fix: some bugfix',
+                'bugfix(foobar): fixed by foobar'
             );
 
             return join(Git::MSG_SEPARATOR."\n", $log).Git::MSG_SEPARATOR."\n";

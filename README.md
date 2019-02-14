@@ -132,15 +132,15 @@ feat: Some more cool stuff
 ```
 
 ## Changelog
-## 1.1.3
-*(2018-08-16)*
-
-#### Added
-* Added message groups according to https://keepachangelog.com/
+## 1.2.0
+*(2019-02-13)*
 
 #### Fixed
 * Use symfony yaml to 3.2
-* Use phpspec version ^2.5
+* Use phpspec version ^2.5 ((thanks to [murrant](https://github.com/murrant)))
+
+#### Features
+* Handled username next to keyword  ((thanks to [ingluife](https://github.com/ingluife)))
 
 #### Bugfixes
 * Use symfony yaml to 3.2
@@ -148,13 +148,11 @@ feat: Some more cool stuff
 
 ---
 
+## 1.1.3
+*(2018-08-16)*
 
-## 1.2.0
-*(2017-12-10)*
-
-#### Bugfixes
-* Use symfony yaml 3.2
-* Use phpspec version ^2.5 ((thanks to [murrant](https://github.com/murrant)))
+#### Added
+* Added message groups according to https://keepachangelog.com/
 
 ---
 

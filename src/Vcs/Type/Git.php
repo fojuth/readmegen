@@ -19,7 +19,7 @@ class Git extends AbstractType
      */
     protected function getBaseCommand()
     {
-        return 'git log --pretty=format:"%s{{MSG_SEPARATOR}}%b"';
+        return 'git log --pretty=format:"%s{{MSG_SEPARATOR}}"';
     }
 
     /**
